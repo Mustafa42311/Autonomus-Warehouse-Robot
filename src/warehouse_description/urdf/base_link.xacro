@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+
+    <!-- <link name="odom"/> -->
+
+    <!-- Connect odom to base_footprint with a dummy joint -->
+    <!-- <joint name="odom_base_footprint_joint" type="fixed">
+      <parent link="odom"/>
+      <child link="base_footprint"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint> -->
+
+     <!-- <link name="world"/> -->
+
+    <!-- Base Footprint -->
+    <link name="base_footprint"/>
+    
+    <!-- Base Footprint joint-->
+    <joint name="base_footprint_joint" type="fixed">
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+      <origin xyz="0 0 0.17" rpy="0 0 0"/>
+    </joint>
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.00452130877244294 0.000150301465874941 0.15093105096812" rpy="0 0 0"/>
+      <mass value="16.2039900136431"/>
+      <inertia ixx="0.34969422706627" ixy="0.000180371273532384" ixz="0.000694701009576337"
+               iyy="0.234584840003601" iyz="4.43498030488043E-06" izz="0.516516918964778"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/base_link.STL"/>
+      </geometry>
+      <material name="dark_grey">
+        <color rgba="0.501960784313725 0.501960784313725 0.501960784313725 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/base_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <origin xyz="0 0 0.033" rpy="0 0 0"/>
+  </joint> -->
+<!-- 
+      <joint name="virtual_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>  -->
+
+
+</robot>

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <!-- Right Wheel Link -->
+  <link name="wheel_right_link">
+    <inertial>
+      <origin xyz="-3.33066907387547E-16 0.014650384517415 2.77555756156289E-17" rpy="0 0 0"/>
+      <mass value="0.450726692741533"/>
+      <inertia ixx="0.00152616308604295" ixy="-1.48434225597159E-17" ixz="5.86726189323416E-35"
+               iyy="0.00282587619984391" iyz="-6.85161546863455E-33" izz="0.00152616308604295"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/wheel_right_link.STL"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/wheel_right_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Right Wheel Joint -->
+  <joint name="wheel_right_joint" type="continuous">
+    <origin xyz="-0.11939 -0.37318 0.045" rpy="0 0 0.0015373"/>
+    <parent link="base_link"/>
+    <child link="wheel_right_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Left Wheel Link -->
+  <link name="wheel_left_link">
+    <inertial>
+      <origin xyz="1.11022302462516E-16 -0.0146503845174151 0" rpy="0 0 0"/>
+      <mass value="0.450726692741534"/>
+      <inertia ixx="0.00152616308604295" ixy="1.6177155877842E-18" ixz="-5.86726189322633E-35"
+               iyy="0.00282587619984392" iyz="1.52809787183052E-36" izz="0.00152616308604295"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/wheel_left_link.STL"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/wheel_left_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Left Wheel Joint -->
+  <joint name="wheel_left_joint" type="continuous">
+    <origin xyz="-0.12054 0.37282 0.045" rpy="0 0 0.0015373"/>
+    <parent link="base_link"/>
+    <child link="wheel_left_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+</robot>

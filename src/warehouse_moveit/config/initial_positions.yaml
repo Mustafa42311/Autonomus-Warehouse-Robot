@@ -1,0 +1,8 @@
+# Default initial positions for warehouse_description's ros2_control fake system
+
+initial_positions:
+  gear_joint: 0.0
+  rail_prismatic_joint: 0.15
+  scissor_joint: 0.1
+  # rack_lower_joint: 0.0
+  # rack_upper_joint: 0.0

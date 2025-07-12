@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="warehouse_description">
+
+  <!-- Command line arguments -->
+  <xacro:arg name="is_ignition" default="true"/>
+  <xacro:arg name="is_sim" default="true"/>
+  
+  <!-- Properties -->
+  <xacro:property name="PI" value="3.141592653589793" />
+  
+  <!-- Include external files -->
+  <xacro:include filename="$(find warehouse_description)/urdf/robot_control.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/robot_gazebo.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/base_link.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/caster_wheels.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/wheels.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/scissor_lift.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/rail_system.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/clamp.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/sensors.xacro" />
+  <xacro:include filename="$(find warehouse_description)/urdf/colours.xacro" />
+
+
+</robot>

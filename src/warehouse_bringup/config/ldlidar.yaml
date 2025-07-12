@@ -1,0 +1,11 @@
+ldlidar_stl_ros2_node:
+  ros__parameters:
+    product_name: LDLiDAR_LD06
+    topic_name: scan
+    frame_id: laser_link
+    port_name: /dev/ttyUSB0     
+    port_baudrate: 230400
+    laser_scan_dir: Counterclockwise
+    enable_angle_crop_func: false
+    angle_crop_min: 135.0
+    angle_crop_max: 225.0

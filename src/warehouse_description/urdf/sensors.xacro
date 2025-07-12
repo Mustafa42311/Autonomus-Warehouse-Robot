@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <!-- Lidar Link -->
+  <link name="lidar_link">
+    <inertial>
+      <origin xyz="0.00160442694463908 0.00247179573952067 0.0148676483375251" rpy="0 0 0"/>
+      <mass value="0.0510641580830712"/>
+      <inertia ixx="1.00882494924593E-05" ixy="-4.13756278564398E-08" ixz="-1.03402001823458E-08"
+               iyy="1.17811117943805E-05" iyz="-4.2401716609376E-08" izz="1.46862810587256E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/lidar_link.STL"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/lidar_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Lidar Joint -->
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="1.1751E-05 0.29383 0.56862" rpy="0 0 0"/>
+    <parent link="scissor_link"/>
+    <child link="lidar_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <!-- IMU Link -->
+  <link name="imu_link">
+    <inertial>
+      <origin xyz="5.55111512312578E-17 2.77555756156289E-17 0.00175" rpy="0 0 0"/>
+      <mass value="0.001232"/>
+      <inertia ixx="2.75403333333335E-08" ixy="4.16359417917348E-24" ixz="4.41162993361615E-25"
+               iyy="5.09483333333336E-08" iyz="-5.23881054616918E-25" izz="7.59733333333337E-08"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/imu_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/imu_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- IMU Joint -->
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="3.7495E-05 0 0.002" rpy="0 0 0.0015373"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <!-- Ultra Front Right Link -->
+  <link name="ultra_front_right_link">
+    <inertial>
+      <origin xyz="0.00687815324663588 -1.64313007644523E-14 -5.55111512312578E-17" rpy="0 0 0"/>
+      <mass value="0.00662930926330101"/>
+      <inertia ixx="5.37509920715151E-07" ixy="7.87122172163231E-08" ixz="-5.39650451822012E-11"
+               iyy="2.56715241404725E-07" iyz="1.97405916717667E-10" izz="5.44646995011506E-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/ultra_front_right_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.125490196078431 0.0823529411764706 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/ultra_front_right_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Ultra Front Right Joint -->
+  <joint name="ultra_front_right_joint" type="fixed">
+    <origin xyz="0.34129 -0.32289 0.09699" rpy="0 0 0.3506"/>
+    <parent link="base_link"/>
+    <child link="ultra_front_right_link"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+  </joint>
+
+  <!-- Ultra Front Left Link -->
+  <link name="ultra_front_left_link">
+    <inertial>
+      <origin xyz="0.0068781532466359 2.08166817117217E-17 0" rpy="0 0 0"/>
+      <mass value="0.00662930926330101"/>
+      <inertia ixx="5.37509920714775E-07" ixy="7.87122172169932E-08" ixz="5.39650451825413E-11"
+               iyy="2.567152414051E-07" iyz="-1.97405916716528E-10" izz="5.44646995011506E-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/ultra_front_left_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.125490196078431 0.0823529411764706 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/ultra_front_left_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Ultra Front Left Joint -->
+  <joint name="ultra_front_left_joint" type="fixed">
+    <origin xyz="0.3403 0.32394 0.09699" rpy="0 0 -0.34753"/>
+    <parent link="base_link"/>
+    <child link="ultra_front_left_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  
+
+</robot>

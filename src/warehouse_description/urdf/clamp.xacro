@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <!-- Clamp Link -->
+  <link name="clamp_link">
+    <inertial>
+      <origin xyz="0.00102115753222676 -0.0265374205487278 0.00418827140993039" rpy="0 0 0"/>
+      <mass value="0.685149673629092"/>
+      <inertia ixx="0.000878927470787955" ixy="9.87991124629924E-07" ixz="1.39275066419946E-06"
+               iyy="0.00709425863239605" iyz="-3.01605755288894E-05" izz="0.00655263417120682"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/clamp_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/clamp_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Clamp Joint -->
+  <joint name="clamp_joint" type="fixed">
+    <origin xyz="0 -0.0755 0.077383" rpy="0 0 0"/>
+    <parent link="rail_prismatic_link"/>
+    <child link="clamp_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <!-- Gear Link -->
+  <link name="gear_link">
+    <inertial>
+      <origin xyz="-5.55111512312578E-17 0.00506216078179605 0" rpy="0 0 0"/>
+      <mass value="0.0171428555874182"/>
+      <inertia ixx="3.04917581693068E-06" ixy="-3.18370115312024E-23" ixz="-6.05301176729497E-21"
+               iyy="5.8332541226192E-06" iyz="2.22872249691285E-22" izz="3.04917581693067E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/gear_link.STL"/>
+      </geometry>
+      <material name="dark_grey">
+        <color rgba="0.776470588235294 0.756862745098039 0.737254901960784 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/gear_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Gear Joint -->
+  <joint name="gear_joint" type="revolute">
+    <origin xyz="0 -0.065 0.00011704" rpy="0 0 0"/>
+    <parent link="clamp_link"/>
+    <child link="gear_link"/>
+    <axis xyz="0 -1 0"/>
+     <limit lower="0" upper="0.1" effort="10" velocity="10"/>
+  </joint>
+
+  <!-- Rack Upper Link -->
+  <link name="rack_upper_link">
+    <inertial>
+      <origin xyz="-0.0521049092202438 -0.0117702332307085 -0.0174937654757626" rpy="0 0 0"/>
+      <mass value="0.0660155834983184"/>
+      <inertia ixx="2.65357596347939E-05" ixy="-1.08922615048083E-06" ixz="-4.77801044676571E-07"
+               iyy="0.000111961035604981" iyz="-1.41760313805187E-06" izz="0.000115492158242179"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/rack_upper_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.698039215686274 0.698039215686274 0.698039215686274 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/rack_upper_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Rack Upper Joint -->
+  <joint name="rack_upper_joint" type="prismatic">
+    <origin xyz="-0.068786 -0.068 0.032117" rpy="0 0 0"/>
+    <parent link="clamp_link"/>
+    <child link="rack_upper_link"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="0.1" effort="100" velocity="1.0"/>
+    <mimic joint="gear_joint" multiplier="1" offset="0"/>
+  </joint>
+
+  <!-- Rack Lower Link -->
+  <link name="rack_lower_link">
+    <inertial>
+      <origin xyz="0.0521049092202479 -0.0117702332307033 0.0174937654757601" rpy="0 0 0"/>
+      <mass value="0.0660155834983358"/>
+      <inertia ixx="2.65357596349163E-05" ixy="1.08922615048039E-06" ixz="-4.77801044685781E-07"
+               iyy="0.000111961035605184" iyz="1.41760313805142E-06" izz="0.00011549215824226"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/rack_lower_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.698039215686274 0.698039215686274 0.698039215686274 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/rack_lower_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Rack Lower Joint -->
+  <joint name="rack_lower_joint" type="prismatic">
+    <origin xyz="0.07195 -0.068 -0.031883" rpy="0 0 0"/>
+    <parent link="clamp_link"/>
+    <child link="rack_lower_link"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0" upper="0.1" effort="100" velocity="1.0"/>
+    <mimic joint="gear_joint" multiplier="1" offset="0"/>
+  </joint>
+
+</robot>

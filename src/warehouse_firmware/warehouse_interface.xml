@@ -1,0 +1,10 @@
+<library path="warehouse_firmware">
+    <class name="warehouse_firmware/WarehouseInterface"
+      type="warehouse_firmware::WarehouseInterface"
+      base_class_type="hardware_interface::SystemInterface"
+    >
+      <description>
+        Warehouse Hardware Interface
+      </description>
+    </class>
+  </library>

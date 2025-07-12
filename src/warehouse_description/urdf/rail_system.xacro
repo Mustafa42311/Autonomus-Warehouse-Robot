@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <!-- Fixed Rail Link -->
+  <link name="fixed_rail_link">
+    <inertial>
+      <origin xyz="-7.63923446722714E-09 -0.000233639509052253 0.00184433843734522" rpy="0 0 0"/>
+      <mass value="1.47313483079496"/>
+      <inertia ixx="0.0298260915891014" ixy="-2.18245106730333E-07" ixz="-2.22646375506961E-11"
+               iyy="0.000966195878673521" iyz="-1.01891158187824E-07" izz="0.030448489439215"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/fixed_rail_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/fixed_rail_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Fixed Rail Joint -->
+  <joint name="fixed_rail_joint" type="fixed">
+    <origin xyz="1.1751E-05 -0.12302 0.37712" rpy="0 0 0"/>
+    <parent link="scissor_link"/>
+    <child link="fixed_rail_link"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <!-- Rail Prismatic Link -->
+  <link name="rail_prismatic_link">
+    <inertial>
+      <origin xyz="-1.82594686037874E-08 -0.0033261873014076 -0.0082196969703181" rpy="0 0 0"/>
+      <mass value="0.334699061388933"/>
+      <inertia ixx="0.000193631994342907" ixy="-4.19758193274223E-08" ixz="-2.7988856250259E-10"
+               iyy="0.00016162817178536" iyz="-1.28713712437666E-09" izz="0.000324070620528637"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/rail_prismatic_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warehouse_description/meshes/rail_prismatic_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Rail Prismatic Joint -->
+  <joint name="rail_prismatic_joint" type="prismatic">
+    <origin xyz="0 0.18441 0.0345" rpy="0 0 0"/>
+    <parent link="fixed_rail_link"/>
+    <child link="rail_prismatic_link"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="-0.01" upper="0.3" effort="1" velocity="0.3"/>
+  </joint>
+
+</robot>

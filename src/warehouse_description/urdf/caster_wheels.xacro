@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Caster wheel properties -->
+  <xacro:property name="caster_mass" value="0.0400823425602907" />
+  <xacro:property name="caster_ixx" value="1.70516021460999E-05" />
+  <xacro:property name="caster_iyy" value="1.59676122933419E-05" />
+  <xacro:property name="caster_izz" value="2.53298813659394E-05" />
+  <xacro:property name="caster_color_r" value="0" />
+  <xacro:property name="caster_color_g" value="0" />
+  <xacro:property name="caster_color_b" value="0.752941176470588" />
+  <xacro:property name="caster_color_a" value="1" />
+
+  <!-- Roller properties -->
+  <xacro:property name="roller_mass" value="0.00525959158878696" />
+  <xacro:property name="roller_ixx" value="2.87975788465058E-07" />
+  <xacro:property name="roller_iyy" value="2.9193363113562E-07" />
+  <xacro:property name="roller_izz" value="2.87975788465058E-07" />
+  <xacro:property name="roller_color_r" value="0.501960784313725" />
+  <xacro:property name="roller_color_g" value="0.501960784313725" />
+  <xacro:property name="roller_color_b" value="0.501960784313725" />
+  <xacro:property name="roller_color_a" value="1" />
+
+  <!-- Roller joint offset (relative to caster wheel) -->
+  <xacro:property name="roller_joint_x" value="0" />
+  <xacro:property name="roller_joint_y" value="0.0089732" />
+  <xacro:property name="roller_joint_z" value="-0.0419" />
+
+  <!-- Caster wheel assembly positions -->
+  <xacro:property name="caster_1_x" value="0.19139" />
+  <xacro:property name="caster_1_y" value="-0.14114" />
+  <xacro:property name="caster_1_z" value="-0.003" />
+
+
+
+  <xacro:property name="caster_4_x" value="0.191394494373563" />
+  <xacro:property name="caster_4_y" value="0.141355561403837" />
+  <xacro:property name="caster_4_z" value="-0.00300000000000478" />
+
+  <!-- Caster wheel macro -->
+  <xacro:macro name="caster_wheel_assembly" params="number joint_x joint_y joint_z 
+                                                    inertial_x inertial_y inertial_z 
+                                                    roller_inertial_x roller_inertial_y">
+    
+    <!-- Caster wheel link -->
+    <link name="caster_wheel_link_${number}">
+      <inertial>
+        <origin xyz="${inertial_x} ${inertial_y} ${inertial_z}" rpy="0 0 0" />
+        <mass value="${caster_mass}" />
+        <inertia ixx="${caster_ixx}"
+                 ixy="-9.96236826670972E-12"
+                 ixz="3.23616425747165E-10"
+                 iyy="${caster_iyy}"
+                 iyz="-1.03322484190611E-10"
+                 izz="${caster_izz}" />
+      </inertial>
+      
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://warehouse_description/meshes/caster_wheel_link_${number}.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="${caster_color_r} ${caster_color_g} ${caster_color_b} ${caster_color_a}" />
+        </material>
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://warehouse_description/meshes/caster_wheel_link_${number}.STL" />
+        </geometry>
+      </collision>
+    </link>
+    
+    <!-- Caster wheel joint -->
+    <joint name="caster_wheel_joint_${number}" type="fixed">
+      <origin xyz="${joint_x} ${joint_y} ${joint_z}" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="caster_wheel_link_${number}" />
+      <axis xyz="0 0 0" />
+    </joint>
+    
+    <!-- Roller link -->
+    <link name="roller_link_${number}">
+      <inertial>
+        <origin xyz="${roller_inertial_x} ${roller_inertial_y} 0" rpy="0 0 0" />
+        <mass value="${roller_mass}" />
+        <inertia ixx="${roller_ixx}"
+                 ixy="1.2464326828749E-24"
+                 ixz="3.97241338071835E-38"
+                 iyy="${roller_iyy}"
+                 iyz="-6.24767609408028E-25"
+                 izz="${roller_izz}" />
+      </inertial>
+      
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://warehouse_description/meshes/roller_link_${number}.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="${roller_color_r} ${roller_color_g} ${roller_color_b} ${roller_color_a}" />
+        </material>
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://warehouse_description/meshes/roller_link_${number}.STL" />
+        </geometry>
+      </collision>
+    </link>
+    
+    <!-- Roller joint -->
+    <joint name="roller_joint_${number}" type="continuous">
+      <origin xyz="${roller_joint_x} ${roller_joint_y} ${roller_joint_z}" rpy="0 0 0" />
+      <parent link="caster_wheel_link_${number}" />
+      <child link="roller_link_${number}" />
+      <axis xyz="0 1 0" />
+    </joint>
+    
+  </xacro:macro>
+
+  <!-- Instantiate all caster wheel assemblies -->
+  <xacro:caster_wheel_assembly 
+    number="1" 
+    joint_x="${caster_1_x}" 
+    joint_y="${caster_1_y}" 
+    joint_z="${caster_1_z}"
+    inertial_x="-2.25869167624904E-06"
+    inertial_y="1.61267645140684E-07"
+    inertial_z="-0.00751150210595708"
+    roller_inertial_x="1.11022302462516E-16"
+    roller_inertial_y="-0.00900000000000001" />
+
+
+
+  <xacro:caster_wheel_assembly 
+    number="4" 
+    joint_x="${caster_4_x}" 
+    joint_y="${caster_4_y}" 
+    joint_z="${caster_4_z}"
+    inertial_x="-2.25869167613801E-06"
+    inertial_y="1.61267645182317E-07"
+    inertial_z="-0.00751150210595702"
+    roller_inertial_x="0"
+    roller_inertial_y="-0.00899999999999995" />
+
+</robot>
